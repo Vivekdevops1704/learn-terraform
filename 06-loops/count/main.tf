@@ -1,5 +1,5 @@
 variable "components" {
-  default = [ "catalogue", "frontend", "mongodb" ]
+  default = ["catalogue", "frontend", "mongodb"]
 }
 
 //resource "aws_instance" "instance" {
@@ -18,6 +18,6 @@ variable "components" {
 
 resource "aws_security_group" "allow_tls" {
   count = length(var.components)
-  name        = element(var.components, count.index)
+  name  = element(var.components, count.index)
 }
 

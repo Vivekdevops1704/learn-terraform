@@ -1,5 +1,5 @@
 module "test" {
-  source = "./local-module"
+  source        = "./local-module"
   instance_type = var.instance_type
 }
 

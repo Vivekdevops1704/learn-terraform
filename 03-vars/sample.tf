@@ -19,7 +19,7 @@ variable "fruits" {
 # Map Variable , Plain
 variable "fruit_stock" {
   default = {
-    apple = 100
+    apple  = 100
     banana = 200
   }
 }
@@ -61,9 +61,9 @@ output "fruit_stock_with_price_of_apple" {
 variable "fruit_details" {
   default = {
     apple = {
-      stock = 100  # number
-      type = "washington" # string
-      for_sale = true  # boolean
+      stock    = 100          # number
+      type     = "washington" # string
+      for_sale = true         # boolean
     }
   }
 }

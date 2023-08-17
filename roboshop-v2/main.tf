@@ -3,7 +3,7 @@ variable "ami" {
 }
 
 variable "security_groups" {
-  default = [ "sg-0dee954b08055e577" ]
+  default = ["sg-0dee954b08055e577"]
 }
 
 variable "instance_type" {
@@ -16,23 +16,23 @@ variable "zone_id" {
 
 variable "components" {
   default = {
-    frontend = { name = "frontend-dev"}
+    frontend  = { name = "frontend-dev" }
     catalogue = { name = "catalogue-dev" }
-    mongodb = { name = "mongodb-dev"}
-    user = { name = "user-dev"}
-    redis = { name = "redis-dev"}
-    cart = { name = "cart-dev"}
-    mysql = { name = "mysql-dev" }
-    shipping = { name = "shipping-dev"}
-    payment = { name = "payment-dev"}
-    rabbitmq = { name = "rabbitmq-dev"}
+    mongodb   = { name = "mongodb-dev" }
+    user      = { name = "user-dev" }
+    redis     = { name = "redis-dev" }
+    cart      = { name = "cart-dev" }
+    mysql     = { name = "mysql-dev" }
+    shipping  = { name = "shipping-dev" }
+    payment   = { name = "payment-dev" }
+    rabbitmq  = { name = "rabbitmq-dev" }
   }
 }
 
 resource "aws_instance" "instance" {
-  for_each = var.components
-  ami           = var.ami
-  instance_type = var.instance_type
+  for_each               = var.components
+  ami                    = var.ami
+  instance_type          = var.instance_type
   vpc_security_group_ids = var.security_groups
 
   tags = {
@@ -43,10 +43,10 @@ resource "aws_instance" "instance" {
 
 resource "aws_route53_record" "record" {
   for_each = var.components
-  zone_id = var.zone_id
-  name    = "${lookup(each.value, "name", null)}.rdevopsb72.online"
-  type    = "A"
-  ttl     = 30
-  records = [lookup(lookup(aws_instance.instance, each.key, null), "private_ip", null) ]
+  zone_id  = var.zone_id
+  name     = "${lookup(each.value, "name", null)}.rdevopsb72.online"
+  type     = "A"
+  ttl      = 30
+  records  = [lookup(lookup(aws_instance.instance, each.key, null), "private_ip", null)]
 }
 
