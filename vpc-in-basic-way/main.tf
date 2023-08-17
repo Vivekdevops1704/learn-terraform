@@ -7,7 +7,7 @@ variable "public_subnets" {
 }
 
 variable "app_subnets" {
-  default = ["10.0.2.0/24", "10.0.3.0/24"]
+  default = ["10.0.3.0/24", "10.0.10.0/24"]
 }
 
 variable "db_subnets" {
